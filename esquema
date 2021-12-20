@@ -1,3 +1,5 @@
 use contolvacacional;
 
 create table empleado (id_empleado int unsigned not null auto_increment, ap_paterno varchar (30) not null, ap_materno varchar (50)not null, nombre varchar (50) not null, fechaIngreso date, antiguedad int, dependencia varchar (50), areaPuesto varchar (100), primary key (id_empleado));
+
+insert into empleado (ap_paterno, ap_materno, nombre, fechaIngreso, antiguedad, dependencia, areaPuesto) values ('cruz', 'rodriguez', 'pedro', '1993-05-01', 8, 'sistemas', 'desarrollo');
