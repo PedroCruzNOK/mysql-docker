@@ -4,6 +4,8 @@ services:
     image: backend
     ports:
       - "3001:3000"
+    extra_hosts:
+      - "basedatos:159.223.152.183" 
     deploy:
       mode: replicated
       replicas: 3
