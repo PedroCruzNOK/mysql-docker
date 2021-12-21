@@ -6,7 +6,7 @@ services:
       - "3001:3000"
     extra_hosts:
       - "basededatos:159.223.152.183" 
-    hotname: "backend"
+    hostname: "backend"
     deploy:
       mode: replicated
       replicas: 3
