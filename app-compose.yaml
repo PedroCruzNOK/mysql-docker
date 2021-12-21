@@ -7,6 +7,8 @@ services:
     extra_hosts:
       - "basededatos:159.223.152.183" 
     hostname: "backend"
+    networks:
+      - general_network
     deploy:
       mode: replicated
       replicas: 3
@@ -16,6 +18,8 @@ services:
     image: apollo
     ports:
       - "4001:4000"
+    networks:
+      - general_network
     deploy:
       mode: replicated
       replicas: 1
@@ -25,6 +29,8 @@ services:
     image: frontend
     ports:
       - "5000:5000"
+    networks:
+      - general_network
     deploy:
       mode: replicated
       replicas: 1
@@ -41,3 +47,7 @@ services:
       placement:
         constraints: [node.role == manager]
 
+networks: 
+  general_network:
+    driver: overlay
+    attachable: true
