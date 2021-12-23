@@ -3,7 +3,7 @@ services:
   backend:
     image: backend
     ports:
-      - "3001:3000"
+      - "3000:3000"
     extra_hosts:
       - "basededatos:161.35.130.110" 
     hostname: "backend"
@@ -17,7 +17,7 @@ services:
   apollo:
     image: apollo
     ports:
-      - "4001:4000"
+      - "4000:4000"
     networks:
       - general_network
     deploy:
