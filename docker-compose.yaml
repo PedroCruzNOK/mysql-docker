@@ -8,6 +8,10 @@ services:
     restart: always
     ports:
       - 3306:3306
+    deploy:
+      placement:
+        constraints: 
+          - node.labels.rol == back
     environment:
       MYSQL_ROOT_PASSWORD: "simons83"
       MYSQL_DATABASE: "contolvacacional"
