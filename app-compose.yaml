@@ -5,7 +5,7 @@ services:
     ports:
       - "3000:3000"
     extra_hosts:
-      - "basededatos:162.243.161.133" 
+      - "basededatos:159.223.181.200" 
     hostname: "backend"
     networks:
       - general_network
