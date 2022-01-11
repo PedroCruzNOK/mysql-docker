@@ -28,4 +28,4 @@ volumes:
 networks: 
   mysql_network:
     name: mysql_net
-    driver: bridge  
+    driver: overlay
