@@ -1,53 +1,27 @@
-version: '3.8'
+version: '3.7'
 services:
-  backend:
-    image: backend
+  mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mysql
+    restart: always
     ports:
-      - "3000:3000"
-    extra_hosts:
-      - "basededatos:159.223.181.200" 
-    hostname: "backend"
-    networks:
-      - general_network
-    deploy:
-      mode: replicated
-      replicas: 35
-      restart_policy:
-        condition: on-failure
-  apollo:
-    image: apollo
-    ports:
-      - "4000:4000"
-    networks:
-      - general_network
-    deploy:
-      mode: replicated
-      replicas: 22
-      restart_policy:
-        condition: on-failure
-  frontend:
-    image: frontend
-    ports:
-      - "5000:5000"
-    networks:
-      - general_network
-    deploy:
-      mode: replicated
-      replicas: 17
-      restart_policy:
-        condition: on-failure
-  visualizer:
-    image: dockersamples/visualizer:stable
-    ports:
-      - "9000:8080"
-    stop_grace_period: 1m30s
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "simons83"
+      MYSQL_DATABASE: "contolvacacional"
+      MYSQL_USER: "pedro"
+      MYSQL_PASSWORD: "simons83"
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    deploy:
-      placement:
-        constraints: [node.role == manager]
-
+      - ./schemas:/var/lib/mysql:rw
+    networks:
+      mysql_network:
+        aliases:
+          - mysql_host
+volumes:
+  schemas: {}
 networks: 
-  general_network:
-    driver: overlay
-    attachable: true      
+  mysql_network:
+    name: mysql_net
+    driver: bridge  
