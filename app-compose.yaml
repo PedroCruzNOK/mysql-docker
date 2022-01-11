@@ -24,7 +24,8 @@ services:
       mode: replicated
       replicas: 1
       placement:
-        constraints: 'node.labels.rol == back'
+        constraints: 
+          - node.labels.rol == back
       restart_policy:
         condition: on-failure
   frontend:
