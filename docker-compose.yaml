@@ -11,7 +11,7 @@ services:
       replicas: 20
       placement:
         constraints: 
-          - node.labels.rol == back
+          - node.labels.rol == front
   redis:
     image: redis:alpine
     deploy:
