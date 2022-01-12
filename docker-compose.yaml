@@ -1,23 +1,28 @@
-version: "3.9"
-
+version: '3.7'
 services:
-  web:
-    image: 127.0.0.1:5000/stackdemo
-    build: .
+  mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mysql
+    restart: always
     ports:
-      - "8000:8000"
-    deploy:
-      mode: replicated
-      replicas: 20
-      placement:
-        constraints: 
-          - node.labels.rol == front
-  redis:
-    image: redis:alpine
-    deploy:
-      mode: replicated
-      replicas: 10
-      placement:
-        constraints: 
-          - node.labels.rol == back
-    
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: "simons83"
+      MYSQL_DATABASE: "contolvacacional"
+      MYSQL_USER: "pedro"
+      MYSQL_PASSWORD: "simons83"
+    volumes:
+      - ./schemas:/var/lib/mysql:rw
+    networks:
+      mysql_network:
+        aliases:
+          - mysql_host
+volumes:
+  schemas: {}
+networks: 
+  mysql_network:
+    name: mysql_net
+    driver: bridge
+
