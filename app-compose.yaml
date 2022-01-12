@@ -12,7 +12,7 @@ services:
       replicas: 8
       placement:
         constraints: 
-          - node.labels.tipo == manager
+          - node.labels.tipo == back
       restart_policy:
         condition: on-failure
   apollo:
