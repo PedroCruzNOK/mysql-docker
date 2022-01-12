@@ -10,6 +10,19 @@ services:
     deploy:
       placement:
         constraints: 
-          - node.labels.tipo == manager
+          - node.labels.tipo == manage
+  backend:
+    image: backend
+    ports:
+      - "3000:3000"
+    extra_hosts:
+      - "basededatos:159.223.111.132" 
+    hostname: "backend"
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
 
 
