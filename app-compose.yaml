@@ -2,19 +2,12 @@ version: '3.9'
 services:
   backend:
     image: backend
-    extra_hosts:
-      - "basededatos:159.223.111.132" 
-    hostname: "backend"
-    networks:
-      - general_network
     deploy:
       mode: replicated
       replicas: 8
       placement:
         constraints: 
           - node.labels.tipo == back
-      restart_policy:
-        condition: on-failure
   apollo:
     image: apollo
     ports:
