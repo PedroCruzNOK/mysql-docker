@@ -14,7 +14,7 @@ services:
         condition: on-failure 
       placement:
         constraints: 
-          - node.labels.rol == manager
+          - node.labels.tipo == manager
  
 
 
