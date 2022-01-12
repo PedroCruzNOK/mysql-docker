@@ -52,7 +52,7 @@ services:
       replicas: 10
       placement:
         constraints: 
-          - node.labels.tipo == back
+          - node.labels.tipo == front
   web:
     image: 127.0.0.1:5000/stackdemo
     build: .
@@ -63,7 +63,7 @@ services:
       replicas: 9
       placement:
         constraints: 
-          - node.labels.tipo == front
+          - node.labels.tipo == manager
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
