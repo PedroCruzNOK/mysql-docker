@@ -63,7 +63,7 @@ services:
       replicas: 9
       placement:
         constraints: 
-          - node.labels.rol == front
+          - node.labels.tipo == front
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
