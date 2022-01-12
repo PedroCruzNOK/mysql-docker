@@ -12,7 +12,7 @@ services:
     deploy:
       mode: replicated
       replicas: 8
-       placement:
+      placement:
         constraints: 
           - node.labels.tipo == manager
       restart_policy:
