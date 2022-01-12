@@ -7,14 +7,57 @@ services:
     extra_hosts:
       - "basededatos:159.223.111.132" 
     hostname: "backend"
+    networks:
+      - general_network
     deploy:
       mode: replicated
       replicas: 1
       restart_policy:
-        condition: on-failure 
+        condition: on-failure
+  apollo:
+    image: apollo
+    ports:
+      - "4000:4000"
+    networks:
+      - general_network
+    deploy:
+      mode: replicated
+      replicas: 1
       placement:
         constraints: 
-          - node.labels.tipo == back
+          - node.labels.tipo == manager
+      restart_policy:
+        condition: on-failure
+  frontend:
+    image: frontend
+    ports:
+      - "5000:5000"
+    networks:
+      - general_network
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.tipo == manager
+      restart_policy:
+        condition: on-failure
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports:
+      - "9000:8080"
+    stop_grace_period: 1m30s
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    deploy:
+      placement:
+        constraints: 
+          - node.labels.tipo == manager
+
+networks: 
+  general_network:
+    driver: overlay
+    attachable: true
  
 
 
