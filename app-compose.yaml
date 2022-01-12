@@ -53,6 +53,17 @@ services:
       placement:
         constraints: 
           - node.labels.tipo == back
+  web:
+    image: 127.0.0.1:5000/stackdemo
+    build: .
+    ports:
+      - "7000:8000"
+    deploy:
+      mode: replicated
+      replicas: 9
+      placement:
+        constraints: 
+          - node.labels.rol == front
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
