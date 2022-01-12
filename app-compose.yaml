@@ -7,7 +7,7 @@ services:
       replicas: 8
       placement:
         constraints: 
-          - node.labels.tipo == front
+          - node.labels.tipo == manager
   apollo:
     image: apollo
     ports:
