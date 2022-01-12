@@ -11,7 +11,7 @@ services:
       - general_network
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 17
       placement:
         constraints: 
           - node.labels.tipo == back
