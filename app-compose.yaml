@@ -19,6 +19,9 @@ services:
       - "basededatos:159.223.111.132" 
     hostname: "backend"
     deploy:
+      placement:
+        constraints: 
+          - node.labels.tipo == back
       mode: replicated
       replicas: 1
       restart_policy:
