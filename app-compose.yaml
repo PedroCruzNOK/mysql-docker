@@ -61,9 +61,6 @@ services:
     deploy:
       mode: replicated
       replicas: 9
-      placement:
-        constraints: 
-          - node.labels.tipo == manager
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
