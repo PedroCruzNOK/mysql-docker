@@ -28,7 +28,7 @@ services:
       replicas: 3
       placement:
         constraints: 
-          - node.labels.tipo == manager
+          - node.labels.tipo == front
       restart_policy:
         condition: on-failure
   frontend:
@@ -53,14 +53,14 @@ services:
       placement:
         constraints: 
           - node.labels.tipo == front
-  web:
-    image: 127.0.0.1:5000/stackdemo
-    build: .
-    ports:
-      - "8000:8000"
+  redis200:
+    image: redis:alpine
     deploy:
       mode: replicated
-      replicas: 9
+      replicas: 10
+      placement:
+        constraints: 
+          - node.labels.tipo == back
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
