@@ -45,6 +45,14 @@ services:
           - node.labels.tipo == manager
       restart_policy:
         condition: on-failure
+  redis:
+    image: redis:alpine
+    deploy:
+      mode: replicated
+      replicas: 10
+      placement:
+        constraints: 
+          - node.labels.tipo == back
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
