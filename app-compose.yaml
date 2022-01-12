@@ -1,47 +1,5 @@
 version: '3.8'
 services:
-  backend:
-    image: backend
-    ports:
-      - "3000:3000"
-    extra_hosts:
-      - "basededatos:159.223.111.132" 
-    hostname: "backend"
-    networks:
-      - general_network
-    deploy:
-      mode: replicated
-      replicas: 1
-      restart_policy:
-        condition: on-failure
-  apollo:
-    image: apollo
-    ports:
-      - "4000:4000"
-    networks:
-      - general_network
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints: 
-          - node.labels.tipo == back
-      restart_policy:
-        condition: on-failure
-  frontend:
-    image: frontend
-    ports:
-      - "5000:5000"
-    networks:
-      - general_network
-    deploy:
-      mode: replicated
-      replicas: 1
-      placement:
-        constraints:
-          - node.labels.tipo == front
-      restart_policy:
-        condition: on-failure
   visualizer:
     image: dockersamples/visualizer:stable
     ports:
@@ -51,9 +9,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       placement:
-        constraints: [node.role == manager]
+        constraints: 
+          - node.labels.tipo == manager
 
-networks: 
-  general_network:
-    driver: overlay
-    attachable: true
+
