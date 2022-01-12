@@ -11,7 +11,10 @@ services:
       - general_network
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 8
+       placement:
+        constraints: 
+          - node.labels.tipo == manager
       restart_policy:
         condition: on-failure
   apollo:
@@ -22,7 +25,7 @@ services:
       - general_network
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 3
       placement:
         constraints: 
           - node.labels.tipo == manager
@@ -36,7 +39,7 @@ services:
       - general_network
     deploy:
       mode: replicated
-      replicas: 1
+      replicas: 5
       placement:
         constraints:
           - node.labels.tipo == manager
@@ -51,8 +54,7 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     deploy:
       placement:
-        constraints: 
-          - node.labels.tipo == manager
+        constraints: [node.role == manager]
 
 networks: 
   general_network:
