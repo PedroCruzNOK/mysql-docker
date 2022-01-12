@@ -5,7 +5,7 @@ services:
     ports:
       - "3000:3000"
     extra_hosts:
-      - "basededatos:159.223.181.200" 
+      - "basededatos:159.223.111.132" 
     hostname: "backend"
     networks:
       - general_network
@@ -42,18 +42,4 @@ services:
           - node.labels.rol == front
       restart_policy:
         condition: on-failure
-  visualizer:
-    image: dockersamples/visualizer:stable
-    ports:
-      - "9000:8080"
-    stop_grace_period: 1m30s
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    deploy:
-      placement:
-        constraints: [node.role == manager]
-
-networks: 
-  general_network:
-    driver: overlay
-    attachable: true
+ 
